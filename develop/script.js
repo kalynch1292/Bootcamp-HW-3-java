@@ -2,7 +2,7 @@ var generateBtn = document.querySelector("#generate");
 
 
 
-var possibleChars = [];
+
 
 
 // return arrayOf{Upper} -- random pick in array of each function//
@@ -11,7 +11,7 @@ var arrayOfUpper = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", 
 //   return arrayOfUpper[Math.floor(Math.Random() * 26)]
 // }
 
-// function getLower() {
+// function getLower() 
 var arrayOfLower = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 //   return arrayOfLower[Math.floor(Math.random() * 26)]
 // }
@@ -29,7 +29,7 @@ var arrayOfNumbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
 
 // Prompt length //
-function writePassword(h) {
+function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
 
@@ -37,48 +37,53 @@ function writePassword(h) {
 
 }
 function generatePassword() {
-
+  var possibleChars = [];
+  var eachCharacters = []
   var desiredLength = parseInt(prompt("How long do you want your password? (Between 8-128 characters)"))
   while (desiredLength < 8 || desiredLength > 128) {
     alert("password must be between 8-128 characters")
     desiredLength = prompt("How long do you want your password? (Between 8-128 characters)")
   }
-
-  var userWantsUpper = confirm('Do you want to include uppercase letters?')
-  var userWantsLower = confirm('Do you want to include lowercase letters?')
-  var userWantsSymbols = confirm('Do you want to include Numbers?')
-  var userWantsNumbers = confirm('Do you want to include Symbols?')
-
-  if (!userWantsUpper && !userWantsLower && !userWantsSymbols && !userWantsNumbers) {
-    alert("You must choose at least one");
-    return
+  while (possibleChars.length === 0) {
+    
+    if (confirm('Do you want to include uppercase letters?')) {
+      possibleChars.push(arrayOfUpper)
+      eachCharacters.push(arrayOfUpper[Math.floor(Math.random()*arrayOfUpper.length)])
+    }
+    if (confirm('Do you want to include lowercase letters?')) {
+      possibleChars.push(arrayOfLower)
+      eachCharacters.push(arrayOfLower[Math.floor(Math.random()*arrayOfLower.length)])
+    }
+    if (confirm('Do you want to include Numbers?')) {
+      possibleChars.push(arrayOfNumbers)
+      eachCharacters.push(arrayOfNumbers[Math.floor(Math.random()*arrayOfNumbers.length)])
+    }
+    if (confirm('Do you want to include Symbols?')) {
+      possibleChars.push(arrayOfSymbols)
+      eachCharacters.push(arrayOfSymbols[Math.floor(Math.random()*arrayOfSymbols.length)])
+    }
+    if(possibleChars.length === 0){
+      alert("You must select a character type")
+    }
   }
 
 
-
-  if (userWantsUpper) {
-    possibleChars.push(arrayOfUpper)
-  }
-  if (userWantsLower) {
-    possibleChars.push(arrayOfLower)
-  }
-  if (userWantsSymbols) {
-    possibleChars.push(arrayOfSymbols)
-  }
-
-  if (userWantsNumbers) {
-    possibleChars.push(arrayOfNumbers)
-  }
-
+  var result = [];
   for (var i = 0; i < desiredLength; i++) {
-    var result = "";
-      var charset = possibleChars[Math.floor(Math.random() * possibleChars.length)];
-      var char = charset[Math.floor(Math.random() * charset.length)];
-     result += char;
-     return result;
+    console.log('in loop')
+    var charset = possibleChars[Math.floor(Math.random() * possibleChars.length)];
+    var char = charset[Math.floor(Math.random() * charset.length)];
+    result.push(char);
   }
+  console.log(result)
+  for (let j = 0; j < eachCharacters.length; j++) {
+    result[j]=eachCharacters[j]
+
+  }
+  console.log(result)
+  return result.join("");
 }
-var password = generatePassword();
+// var password = generatePassword();
 
 
 
@@ -90,4 +95,4 @@ var password = generatePassword();
 
 
 // Add event listener to generate button // 
-generateBtn.addEventListener("click", generatePassword);
+generateBtn.addEventListener("click", writePassword);

@@ -4,3 +4,6 @@ Create a secure password by following these steps.
 - select the number of characters
 - select character types
 - copy password prompted
+
+## Image of deployed site  
+![screenshot](./assets/screenshot.png)
