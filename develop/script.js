@@ -1,4 +1,3 @@
-// Assignment Code//
 var generateBtn = document.querySelector("#generate");
 
 
@@ -58,8 +57,6 @@ function generatePassword() {
 
 
 
-
-  var confirmStyle
   if (userWantsUpper) {
     possibleChars.push(arrayOfUpper)
   }
@@ -73,6 +70,13 @@ function generatePassword() {
   if (userWantsNumbers) {
     possibleChars.push(arrayOfNumbers)
   }
+
+  for (var i = 0; i < desiredLength; i++) {
+    var charset = possibleChars[Math.floor(Math.random() * possibleChars.length)];
+    var char = charset[Math.floor(Math.Random() * charset.length)];
+    result += char;
+  }
+  return result;
 }
 
 
@@ -80,25 +84,6 @@ function generatePassword() {
 
 
 
-//   for (var i = 0; i < desiredLength; i++) {
-//     var charset = possibleChars[Math.floor(Math.random() * possibleChars.length)];
-//     var char = charset[Math.floor(Math.Random() * charset.length)];
-//     result += char;
-//   }
-//   return result;
-// }
-
-
-
-
-
-
-/////// 
-
-
-
-
-// need to make sure password includes everything the user wants // 
 
 
 
